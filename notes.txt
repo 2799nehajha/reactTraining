@@ -26,3 +26,8 @@ vscode-icons
 v12.8.0
 VSCode Icons Team
 ++++++++++++++++++++++++
+
+
+https://github.com/coreybutler/nvm-windows/releases
+
+
