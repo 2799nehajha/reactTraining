@@ -20,7 +20,7 @@
                 return this.getCostPrice() + calculateSellingPrice();
             }
         }; */
-        var getCostPrice = function(){
+        /* var getCostPrice = function(){
             return 10000;
         };
         var cart = {
@@ -38,8 +38,28 @@
         console.log(cart.title);// C.A.R.T;
         console.log(cart.getCostPrice());// 100;
         console.log(cart.getSellingPrice());// ??? ;
-        
-    </script>
+         */
+        var cart = {
+            title : "C.A.R.T",
+            getCostPrice : function(){
+                console.log(this.title);
+                return 100;
+            },
+            getSellingPrice : function(){
+                console.log(this.title);
+                var calculateSellingPrice = () => {
+                    return this.getCostPrice() * 0.2;
+                };
+                return this.getCostPrice() + calculateSellingPrice();
+            }
+        };
+        console.log(cart.getSellingPrice())
+        /*      
+        var user = "vijay";
+        console.log(window.user);
+        console.log(user); 
+        */
+        </script>
 </head>
 <body>
     

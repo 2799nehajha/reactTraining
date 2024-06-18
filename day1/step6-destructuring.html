@@ -27,17 +27,28 @@
        var herolastname = hero.lastname;
        var herocity = hero.city; 
        */
-       var {
+/*        var {
         title : herotitle, 
         power : heropower, 
         firstname : herofirstname, 
         lastname : herolastname, 
-        city : herocity } = hero;
+        city : herocity } = hero; */
 
-       console.log(heropower);
+
+        /*      
+        var {
+        title : title, 
+        power : power, 
+        firstname : firstname, 
+        lastname : lastname, 
+        city : city } = hero; 
+        */
+        var { title,  power, firstname,  lastname,  city } = hero;
+
+       console.log(power);
        console.log(hero.power);
-       heropower = 10;
-       console.log("heropower",heropower);// ??? 10
+       power = 10;
+       console.log("heropower",power);// ??? 10
        console.log("hero.power",hero.power); // ??? 6
     </script>
 </head>
