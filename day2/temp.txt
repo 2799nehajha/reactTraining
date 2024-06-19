@@ -1,53 +1,50 @@
-import React,{ Component } from "react";
-import ListComp from "./list";
+import { Component } from "react";
+import ChildComp from "./child";
 
 class App extends Component{
     state = {
-        avengers : [],
-        justiceleague : [],
-        indicheroes : [],
-        index : ["Avenger", "Justice League", "Indic Heroes"]
+        show : true
     }
-    avengerinput = React.createRef();
-    jlinput = React.createRef();
-    ihinput = React.createRef();
     render(){
         return <div>
-                    <h1>Welcome to React Workshop</h1>
-                    <h2>Lists</h2>
-                    <label htmlFor="avenger">Avengers</label>
-                    <input ref={this.avengerinput} id="avenger" type="text" />
-                    <button onClick={ this.avengerHandler }>Add Avenger</button>
-                    <br />
-                    <br />
-                    <label htmlFor="justiceleague">Justice League</label>
-                    <input ref={this.jlinput} id="justiceleague" type="text" />
-                    <button onClick={ this.justiceLeagueHandler }>Add Justice League</button>
-                    <br />
-                    <br />
-                    <label htmlFor="indichero" >Indic Heroes</label>
-                    <input ref={this.ihinput} id="indichero" type="text" />
-                    <button onClick={this.indicHeroHandler}>Add Indic Hero</button>
-                    <ListComp version="101" title={this.state.index[0]} list={this.state.avengers}/>
-                    <ListComp version="102" title={this.state.index[1]} list={this.state.justiceleague}/>
-                    <ListComp title={this.state.index[2]} list={this.state.indicheroes}/>
+                    <h1>Conditional <cite> Rendering </cite></h1>
+                    <input type="checkbox" onChange={() => this.setState({show : !this.state.show})} />
+                    <h4>Show now is : { this.state.show ? "True" : "False" }</h4>
+                    { this.state.show && <ChildComp>
+                        hello child component
+                        <ul>
+                            <li>List Item 1</li>
+                            <li>List Item 2</li>
+                            <li>List Item 3</li>
+                            <li>List Item 4</li>
+                            <li>List Item 5</li>
+                        </ul>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur nobis hic laboriosam nam labore numquam veniam, rem aut beatae veritatis ut alias possimus ducimus minus perferendis quaerat quam ipsum fuga.
+                            Excepturi unde ullam tenetur aut suscipit reiciendis veritatis exercitationem explicabo ab, quis, cupiditate ipsa, harum omnis commodi quae enim sapiente deserunt nesciunt aliquam saepe temporibus. Quibusdam, deleniti! Repudiandae, qui ab.
+                        </p>
+                    </ChildComp> }
                </div>
-    }
-    avengerHandler = () => {
-       this.setState({
-        avengers : [...this.state.avengers, this.avengerinput.current.value]
-       })
-    }
-    justiceLeagueHandler = () => {
-        this.setState({
-         justiceleague : [...this.state.justiceleague, this.jlinput.current.value]
-        })
-    }
-    indicHeroHandler = () => {
-        this.setState({
-         indicheroes : [...this.state.indicheroes, this.ihinput.current.value]
-        })
     }
 }
 
 export default App;
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+import { Component } from "react";
+/* 
+props, children, state, forceUpdate, setState
+*/
+class ChildComp extends Component{
+    render(){
+        return <div>
+                    <h2>Child Component</h2>
+                    <div>{ this.props.children }</div>
+               </div>
+    }
+}
+
+export default ChildComp;
