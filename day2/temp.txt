@@ -1,69 +1,17 @@
-article.js
--------------
-export let Article = () => <article>
-                                Content comes here
-                                Content comes here
-                                Content comes here
-                                Content comes here
-                                Content comes here
-                            </article>
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-footer.js
-------------
-let Footer = function(){
-    return <footer>
-                <h4>&copy; Copyrights reserved by Society Generale 2024</h4>
-           </footer>
-};
-
-export default Footer;
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-header.js
------------
-let Header = function(){
-    return <header>
-                <h2>Welcome to Society Generale</h2>
-                <h3>the future is you</h3>
-           </header>
-};
-
-export default Header;
-
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-main.js
-----------
 import { Component } from "react";
-import { Article } from "./article";
+import ListComp from "./list";
 
-class Main extends Component{
+class App extends Component{
+    avengers = ["Ironman", "Hulk", "Captain America", "Thor", "Dr Strange"];
+    justiceleague = ["Batman","Superman", "Wonder Women", "Flash", "Aquaman"];
+    indicheroes = ["Shaktiman", "Chota Bheem", "Chacha Chowdary", "Bahubali"];
+    index = ["Avenger", "Justice League", "Indic Heroes"];
     render(){
         return <div>
-                    <Article/>
-                    <Article/>
-                    <Article/>
-                    <Article/>
+                    <h1>Welcome to React Workshop</h1>
+                    <h2>Lists</h2>
                </div>
     }
 }
 
-export default Main
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-index.js
-----------
-import ReactDOM from "react-dom/client";
-import Header from "./components/header";
-import Footer from "./components/footer";
-import Main from "./components/main";
-
-ReactDOM.createRoot(document.getElementById("root"))
-.render(<div>
-        <Header/> 
-        <Main/> 
-        <Footer/>
-        </div>)
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+export default App;
