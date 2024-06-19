@@ -28,6 +28,7 @@ VSCode Icons Team
 ++++++++++++++++++++++++
 
 
+
 https://github.com/coreybutler/nvm-windows/releases
 
 
@@ -37,8 +38,12 @@ link for React CDN
 
 https://legacy.reactjs.org/docs/cdn-links.html
 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Vite Commands 
+-------------
 
-
-
-
-
+npm create vite@latest steps -- --template react 
+cd steps
+npm install
+npm run dev
+http://localhost:5173/
