@@ -2,14 +2,30 @@ import { Component } from "react";
 import ListComp from "./list";
 
 class App extends Component{
-    avengers = ["Ironman", "Hulk", "Captain America", "Thor", "Dr Strange"];
-    justiceleague = ["Batman","Superman", "Wonder Women", "Flash", "Aquaman"];
-    indicheroes = ["Shaktiman", "Chota Bheem", "Chacha Chowdary", "Bahubali"];
+    avengers = [];
+    justiceleague = [];
+    indicheroes = [];
     index = ["Avenger", "Justice League", "Indic Heroes"];
     render(){
         return <div>
                     <h1>Welcome to React Workshop</h1>
                     <h2>Lists</h2>
+                    <label htmlFor="">Avengers</label>
+                    <input type="text" />
+                    <button>Add Avenger</button>
+                    <br />
+                    <br />
+                    <label htmlFor="">Justice League</label>
+                    <input type="text" />
+                    <button>Add Justice League</button>
+                    <br />
+                    <br />
+                    <label htmlFor="">Indic Heroes</label>
+                    <input type="text" />
+                    <button>Add Indic Hero</button>
+                    <ListComp version="101" title={this.index[0]} list={this.avengers}/>
+                    <ListComp version="102" title={this.index[1]} list={this.justiceleague}/>
+                    <ListComp title={this.index[2]} list={this.indicheroes}/>
                </div>
     }
 }
