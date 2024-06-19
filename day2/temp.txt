@@ -1,32 +1,52 @@
-import { Component } from "react";
+import React,{ Component } from "react";
 import ListComp from "./list";
 
 class App extends Component{
-    avengers = [];
-    justiceleague = [];
-    indicheroes = [];
-    index = ["Avenger", "Justice League", "Indic Heroes"];
+    state = {
+        avengers : [],
+        justiceleague : [],
+        indicheroes : [],
+        index : ["Avenger", "Justice League", "Indic Heroes"]
+    }
+    avengerinput = React.createRef();
+    jlinput = React.createRef();
+    ihinput = React.createRef();
     render(){
         return <div>
                     <h1>Welcome to React Workshop</h1>
                     <h2>Lists</h2>
-                    <label htmlFor="">Avengers</label>
-                    <input type="text" />
-                    <button>Add Avenger</button>
+                    <label htmlFor="avenger">Avengers</label>
+                    <input ref={this.avengerinput} id="avenger" type="text" />
+                    <button onClick={ this.avengerHandler }>Add Avenger</button>
                     <br />
                     <br />
-                    <label htmlFor="">Justice League</label>
-                    <input type="text" />
-                    <button>Add Justice League</button>
+                    <label htmlFor="justiceleague">Justice League</label>
+                    <input ref={this.jlinput} id="justiceleague" type="text" />
+                    <button onClick={ this.justiceLeagueHandler }>Add Justice League</button>
                     <br />
                     <br />
-                    <label htmlFor="">Indic Heroes</label>
-                    <input type="text" />
-                    <button>Add Indic Hero</button>
-                    <ListComp version="101" title={this.index[0]} list={this.avengers}/>
-                    <ListComp version="102" title={this.index[1]} list={this.justiceleague}/>
-                    <ListComp title={this.index[2]} list={this.indicheroes}/>
+                    <label htmlFor="indichero" >Indic Heroes</label>
+                    <input ref={this.ihinput} id="indichero" type="text" />
+                    <button onClick={this.indicHeroHandler}>Add Indic Hero</button>
+                    <ListComp version="101" title={this.state.index[0]} list={this.state.avengers}/>
+                    <ListComp version="102" title={this.state.index[1]} list={this.state.justiceleague}/>
+                    <ListComp title={this.state.index[2]} list={this.state.indicheroes}/>
                </div>
+    }
+    avengerHandler = () => {
+       this.setState({
+        avengers : [...this.state.avengers, this.avengerinput.current.value]
+       })
+    }
+    justiceLeagueHandler = () => {
+        this.setState({
+         justiceleague : [...this.state.justiceleague, this.jlinput.current.value]
+        })
+    }
+    indicHeroHandler = () => {
+        this.setState({
+         indicheroes : [...this.state.indicheroes, this.ihinput.current.value]
+        })
     }
 }
 
