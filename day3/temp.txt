@@ -8,14 +8,16 @@ class App extends Component{
         user : []
     }
     render(){
-        return <div>
+        return <div className="container">
                     <h1>Hello React</h1>
                     {/* <ul>
                         { this.state.user.map(val => <li key={val.id}>{ val.first_name +" "+val.last_name }</li>)}
                     </ul> */}
-                    <button onClick={ ()=> this.getData(1) }>Get First Data</button>
-                    <button onClick={ ()=> this.getData(2) }>Get Second Data</button>
-                    <table>
+                    <button className="btn btn-primary" onClick={ ()=> this.getData(1) }>Get First Data</button>
+                    &nbsp;
+                    &nbsp;
+                    <button className="btn btn-primary" onClick={ ()=> this.getData(2) }>Get Second Data</button>
+                    <table className="table table-striped">
                         <thead>
                             <tr>
                                 <th>Sl #</th>
