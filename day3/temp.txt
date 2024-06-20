@@ -1,17 +1,25 @@
 app.jsx
 -----------
-
 import { Component } from "react";
 
 class App extends Component{
     state = {
         strength : 0
     }
+    constructor(){
+        super();
+        // this.increaseStrength = this.increaseStrength.bind(this);
+    }
     render(){
         return <div>
                     <h1>Hello React</h1>
                     <h2>Sterngth : { this.state.strength }</h2>
-                    <button>Increase Strength</button>
+                    {/* <button onClick={ () => this.increaseStrength() }>Increase Strength</button> */}
+                    <button onClick={ this.increaseStrength }>Increase Strength</button>
+                    <button onClick={ this.increaseStrength }>Increase Strength</button>
+                    <button onClick={ this.increaseStrength }>Increase Strength</button>
+                    <button onClick={ this.increaseStrength }>Increase Strength</button>
+                    <button onClick={ this.increaseStrength }>Increase Strength</button>
                     <button>Decrease Strength</button>
                     <br />
                     <input type="number" />
@@ -19,6 +27,21 @@ class App extends Component{
                     <br />
                     <input type="range" />
                 </div>
+    }
+    increaseStrength = () => {
+        this.setState({
+            strength : this.state.strength+1
+        })
+    }
+    decreaseStrength(){
+        this.setState({
+            strength : this.state.strength-1
+        })
+    }
+    setStrength(nstrength){
+        this.setState({
+            strength : nstrength
+        })
     }
 }
 
