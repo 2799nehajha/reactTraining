@@ -1,127 +1,34 @@
 app.jsx
 ----------
 import React, { Component } from "react";
-import ChildComp from "./child";
+import axios from "axios";
 
 class App extends Component{
     state = {
-        appTitle : "App Component",
-        appPower : 5
-    }
-    constructor(){
-        super();
-        console.log("App Component's constructor was called")
-    }
-    static getDerivedStateFromProps(){
-        console.log("App Component's getDerivedStateFromProps was called");
-        return {}
-    }
-    shouldComponentUpdate(){
-        console.log("App Component's shouldComponentUpdate was called");
-        return true
+        user : []
     }
     render(){
-        console.log("App Component's render was called")
         return <div>
                     <h1>Hello React</h1>
-                    <h2>App Power is : { this.state.appPower }</h2>
-                    <input type="number" value={this.state.appPower} 
-                    onChange={(event) => this.setState({ appPower : Number(event.target.value) })} />
-                    <input value={this.state.appTitle} 
-                    onChange={(event) => this.setState({ appTitle : event.target.value })} />
-                    <button onClick={() => this.setState({appPower : 5})}>set power to 5</button>
-                    <hr />
-                    { this.state.appPower <= 20 && <ChildComp atitle={this.state.appTitle} apower={ this.state.appPower }/> }
-               </div>
+                    <ul>
+                        { this.state.user.map(val => <li key={val.id}>{ val.first_name +" "+val.last_name}</li>)}
+                    </ul>
+                </div>
     }
     componentDidMount(){
-        console.log("App Component's componentDidMount was called");
+       axios.get("https://reqres.in/api/users?page=2")
+       .then( res => {
+             console.log(res.data.data);
+            this.setState(()=>{ 
+                return {user : res.data.data }
+             }, ()=>{
+                // console.log("data recieved");
+                // console.log(this.state.user)
+            });
+
+       })
+       .catch(err => console.log("Error ", err))
     }
-    
 }
 
 export default App;
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-child.jsx
------------
-import React, { Component } from "react";
-
-class ChildComp extends Component{
-    state = {
-        childTitle : "Child Component",
-        childPower : 0
-    }
-    logs = [];
-    constructor(){
-        super();
-        console.log("ChildComp's constructor was called");
-        this.state.childPower = 1;
-    }
-    static getDerivedStateFromProps(compprop, compstate){
-        // console.log(arguments[0], arguments[1]);
-        console.log("ChildComp's getDerivedStateFromProps was called");
-        return {
-            childPower : compprop.apower * 2
-        }
-    }
-    shouldComponentUpdate(updatedprop, updatedstate){
-        // console.log(arguments[0], arguments[1], arguments[2]);
-        console.log("ChildComp's shouldComponentUpdate was called");
-       /*  
-       if(updatedprop.apower > 10){
-            return false
-        }else{
-            return true
-        } 
-        */
-        /* if(updatedstate.childPower > 24){
-            return false
-        }else{
-            return true
-        } */
-
-        if(updatedprop.atitle === "vijay"){
-            return false
-        }else{
-            return true
-        } 
-    }
-    render(){
-        console.log("ChildComp's render was called");
-        return <div>
-                    <h2>Child Component</h2>
-                    <h3>App Title {this.props.atitle}</h3>
-                    <h3>App Power {this.props.apower}</h3>
-                    <h3>Child Power {this.state.childPower}</h3>
-               </div>
-    }
-    componentDidMount(){
-        console.log("ChildComp's componentDidMount was called");
-        // to make api calls
-    }
-    
-    getSnapshotBeforeUpdate(){
-        console.log(arguments[0], arguments[1]);
-        console.log("ChildComp's getSnapshotBeforeUpdate was called");
-        return {
-            oldprops : arguments[0],
-            oldstate : arguments[1],
-            timestamp : new Date().getTime()
-        }
-    }
-
-    componentDidUpdate(){
-        console.log(arguments[0],arguments[1],arguments[2]);
-        console.log("ChildComp's componentDidUpdate was called");
-        this.logs.push(arguments[2]);
-        console.log( this.logs , new Date(this.logs[this.logs.length-1].timestamp))
-        // this.setState({ logs : [...this.state.logs, arguments[2]] })
-    }
-    componentWillUnmount(){
-        console.log("ChildComp's componentWillUnmount was called");
-        // unsubscribe to api calls
-    }
-
-}
-
-export default ChildComp;
