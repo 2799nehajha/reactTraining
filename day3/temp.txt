@@ -11,26 +11,32 @@ class App extends Component{
         return <div>
                     <h1>Hello React</h1>
                     <h4>Power : { this.state.power }</h4>
-                    { this.state.show && <div style={ { backgroundColor : 'crimson', color : 'papayawhip' , fontFamily : 'sans-serif', padding : "10px", textAlign : 'center' } }>Power is more than 50</div>}
-                    <input onChange={ this.rangeHandler } type="range" />
+                    <h4>Title : { this.props.title }</h4>
+                    { this.state.show && <div style={ { backgroundColor : 'crimson', color : 'papayawhip' , fontFamily : 'sans-serif', padding : "10px", textAlign : 'center' } }>Power is more than 10</div>}
+                    <input onChange={ this.rangeHandler } type="number" />
+                    <button onClick={ this.rangeHandler }>Increase Power</button>
                </div>
     }
     rangeHandler = (evt) => {
         // console.log("power was updated");
-        this.setState({
-            power : Number(evt.target.value)
+        this.setState(function(currentState, currentProps){
+            console.log(arguments[0], arguments[1]);
+            console.log(currentState, currentProps);
+            return {
+                power : Number(evt.target.value)
+            }
+        }, function(){
+            if(this.state.power >= 10){
+                this.setState({
+                    show : true
+                })
+            }else{
+                this.setState({
+                    show : false
+                })
+            }
+            console.log("power now is ", this.state.power);
         });
-        console.log("power now is ", this.state.power);
-
-        if(this.state.power > 50){
-            this.setState({
-                show : true
-            })
-        }else{
-            this.setState({
-                show : false
-            })
-        }
     }
 }
 
