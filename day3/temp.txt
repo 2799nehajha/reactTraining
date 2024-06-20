@@ -9,24 +9,50 @@ class App extends Component{
         return <div>
                     <h1>Hello React</h1>
                     <ChildComp city="Bengaluru" sales={Math.round(Math.random() * 100)} version={101} title="Child Comp 1"/>
+                    <ChildComp city="Mangalore" sales={Math.round(Math.random() * 100)} version={102} title="Child Comp 1"/>
+                    <ChildComp city="Mumbai" sales={10} version={103} title="Child Comp 1"/>
+                    <ChildComp city="Delhi" sales={Math.round(Math.random() * 100)}  version={104}  title="Child Comp 1"/>
+                    <ChildComp city="Hyderabad" sales={Math.round(Math.random() * 100)} version={105} title="Last but one comp" />
+                    <ChildComp city="Chennai" sales={20} version={106} title="Last Component" />
                </div>
     }
 }
 
 export default App;
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 child.jsx
 ---------
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 class ChildComp extends Component{
+    /* 
+    static defaultProps = {
+        version : "001",
+        city : "Mysore",
+        sales : 0,
+        title : "Yet to be assigned",
+    } 
+    */
+   static propTypes = {
+    version : PropTypes.number.isRequired,
+    city : PropTypes.string.isRequired,
+    sales : PropTypes.number.isRequired,
+    title : PropTypes.string.isRequired
+   }
     render(){
         return <div style={ { width:"400px", float:"left", fontFamily : "arial", fontSize : "20px", border : "2px solid red", padding :'20px', margin:"10px" } }>
-                    <h2>Child Component</h2>
+                    <h3>Child Component : Version { this.props.version }</h3>
                     <h4>{ this.props.title }</h4>
                     <ul>
-                        <li>Sales { this.props.sales }</li>
+                        <li>Sales { this.props.sales * 2 }</li>
+                        <li>Version { this.props.version }</li>
+                        <li>Version { this.props.version }</li>
+                        <li>Version { this.props.version }</li>
+                        <li>Version { this.props.version }</li>
+                        <li>Version { this.props.version }</li>
                         <li>Version { this.props.version }</li>
                         <li>City { this.props.city }</li>
                     </ul>
@@ -34,6 +60,14 @@ class ChildComp extends Component{
     }
 }
 
+/* 
+ChildComp.defaultProps = {
+    version : "002",
+    city : "Mysore",
+    sales : 0,
+    title : "Yet to be assigned",
+}
+ */
 export default ChildComp;
 
 
