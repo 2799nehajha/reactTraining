@@ -10,13 +10,47 @@ class App extends Component{
     render(){
         return <div>
                     <h1>Hello React</h1>
-                    <ul>
-                        { this.state.user.map(val => <li key={val.id}>{ val.first_name +" "+val.last_name}</li>)}
-                    </ul>
+                    {/* <ul>
+                        { this.state.user.map(val => <li key={val.id}>{ val.first_name +" "+val.last_name }</li>)}
+                    </ul> */}
+                    <button onClick={ ()=> this.getData(1) }>Get First Data</button>
+                    <button onClick={ ()=> this.getData(2) }>Get Second Data</button>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sl #</th>
+                                <th>Full Name</th>
+                                <th>Photo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.user.map((val, idx) => <tr key={ val.id }>
+                                                                    <td>{ idx+1 }</td>
+                                                                    <td>{ val.first_name+" "+val.last_name }</td>
+                                                                    <td>
+                                                                        <img width="50" src={ val.avatar } alt={ val.first_name+" "+val.last_name } />
+                                                                    </td>
+                                                                </tr>)
+                            }
+                        </tbody>
+                    </table>
                 </div>
     }
-    componentDidMount(){
-       axios.get("https://reqres.in/api/users?page=2")
+    getData = (num) => {
+        axios.get("https://reqres.in/api/users?page="+num)
+       .then( res => {
+             console.log(res.data.data);
+            this.setState(()=>{ 
+                return {user : res.data.data }
+             }, ()=>{
+                console.log(this.state.user)
+            });
+       })
+       .catch(err => console.log("Error ", err))
+    }
+    /* componentDidMount(){
+       axios.get("https://reqres.in/api/users?page=1")
        .then( res => {
              console.log(res.data.data);
             this.setState(()=>{ 
@@ -24,11 +58,25 @@ class App extends Component{
              }, ()=>{
                 // console.log("data recieved");
                 // console.log(this.state.user)
+                console.log(this.state.user)
             });
-
        })
        .catch(err => console.log("Error ", err))
-    }
+    } */
 }
 
 export default App;
+
+
+/* 
+async function myfun(){
+     return await Promise().resolve("resolve data from promise")
+};
+*/
+/* 
+async function myfun(){
+     return await axios.get("https://reqres.in/api/users?page=2")
+};
+
+myfun().catch(res => console.log(res)) 
+*/
