@@ -18,12 +18,11 @@ export default App;
 
 child.jsx
 ---------
-
 import { Component } from "react";
 
 class ChildComp extends Component{
     render(){
-        return <div style={ { fontFamily : "arial", fontSize : "30px", border : "2px solid red", padding :'20px' } }>
+        return <div style={ { width:"400px", float:"left", fontFamily : "arial", fontSize : "20px", border : "2px solid red", padding :'20px', margin:"10px" } }>
                     <h2>Child Component</h2>
                     <h4>{ this.props.title }</h4>
                     <ul>
