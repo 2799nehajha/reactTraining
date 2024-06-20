@@ -1,84 +1,108 @@
 app.jsx
-----------
+-----------
+
 import React, { Component } from "react";
-import axios from "axios";
+import ClassComp from "./components/classComp";
+import FunComp from "./components/funComp";
+import PureClassComp from "./components/pureClassComp";
+import MemoFunComp from "./components/memoComp";
 
 class App extends Component{
     state = {
-        user : []
+        power : "0"
     }
     render(){
         return <div className="container">
                     <h1>Hello React</h1>
-                    {/* <ul>
-                        { this.state.user.map(val => <li key={val.id}>{ val.first_name +" "+val.last_name }</li>)}
-                    </ul> */}
-                    <button className="btn btn-primary" onClick={ ()=> this.getData(1) }>Get First Data</button>
-                    &nbsp;
-                    &nbsp;
-                    <button className="btn btn-primary" onClick={ ()=> this.getData(2) }>Get Second Data</button>
-                    <table className="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Sl #</th>
-                                <th>Full Name</th>
-                                <th>Photo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.user.map((val, idx) => <tr key={ val.id }>
-                                                                    <td>{ idx+1 }</td>
-                                                                    <td>{ val.first_name+" "+val.last_name }</td>
-                                                                    <td>
-                                                                        <img width="50" src={ val.avatar } alt={ val.first_name+" "+val.last_name } />
-                                                                    </td>
-                                                                </tr>)
-                            }
-                        </tbody>
-                    </table>
+                    <input onChange={(event) => this.setState({ power : event.target.value })} className="mb-2" type="number" />
+                    <br />
+                    <button onClick={() => this.setState({ power : 10 })} className="btn btn-warning mb-2">Set Power to 10</button>
+                    <hr />
+                    <ClassComp power={this.state.power} title={this.state.title}/>
+                    <FunComp power={this.state.power} title={this.state.title}/>
+                    <PureClassComp power={this.state.power} title={this.state.title}/>
+                    <MemoFunComp power={this.state.power} title={this.state.title}/>
                 </div>
-    }
-    getData = (num) => {
-        axios.get("https://reqres.in/api/users?page="+num)
-       .then( res => {
-             console.log(res.data.data);
-            this.setState(()=>{ 
-                return {user : res.data.data }
-             }, ()=>{
-                console.log(this.state.user)
-            });
-       })
-       .catch(err => console.log("Error ", err))
-    }
-    /* componentDidMount(){
-       axios.get("https://reqres.in/api/users?page=1")
-       .then( res => {
-             console.log(res.data.data);
-            this.setState(()=>{ 
-                return {user : res.data.data }
-             }, ()=>{
-                // console.log("data recieved");
-                // console.log(this.state.user)
-                console.log(this.state.user)
-            });
-       })
-       .catch(err => console.log("Error ", err))
-    } */
+        }
 }
 
 export default App;
 
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+classComp.jsx
+--------------------
 
-/* 
-async function myfun(){
-     return await Promise().resolve("resolve data from promise")
-};
-*/
-/* 
-async function myfun(){
-     return await axios.get("https://reqres.in/api/users?page=2")
-};
+import { Component } from "react";
 
-myfun().catch(res => console.log(res)) 
-*/
+class ClassComp extends Component{
+    /* 
+    shouldComponentUpdate(){
+        if(arguments[0].power == "10"){
+            return false
+        }else{
+            return true
+        }
+    } 
+    */
+    render(){
+        console.log("ClassComp was rendered");
+        return <div>
+                    <h4>Class Component</h4>
+                    <h5>Power : {this.props.power}</h5>
+               </div>
+    }
+}
+
+export default ClassComp;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+funComp.jsx
+---------------
+
+let FunComp = (props) => {
+        console.log("FunComp was rendered");
+        return <div>
+                    <h4>Function Component</h4>
+                    <h5>Power : {props.power}</h5>
+               </div>
+  }
+
+export default FunComp;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+memoComp.jsx
+-----------------
+
+import { memo } from "react";
+
+let MemoFunComp = (props) => {
+    console.log("Memo FunComp was rendered");
+    return <div>
+                <h4>Memo Function Component</h4>
+                <h5>Power : {props.power}</h5>
+           </div>
+}
+// HOC
+export default memo(MemoFunComp);
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+pureClassComp.jsx
+----------------------
+
+import { PureComponent } from "react";
+
+class PureClassComp extends PureComponent{
+    render(){
+        console.log("Pure Class Comp was rendered");
+        return <div>
+                    <h4>Pure Class Component</h4>
+                    <h5>Power : {this.props.power}</h5>
+               </div>
+    }
+}
+export default PureClassComp;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
