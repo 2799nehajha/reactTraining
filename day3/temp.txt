@@ -1,0 +1,54 @@
+app.jsx
+-----------
+
+import { Component } from "react";
+import ChildComp from "./components/child";
+
+class App extends Component{
+    render(){
+        return <div>
+                    <h1>Hello React</h1>
+                    <ChildComp city="Bengaluru" sales={Math.round(Math.random() * 100)} version={101} title="Child Comp 1"/>
+               </div>
+    }
+}
+
+export default App;
+
+
+child.jsx
+---------
+
+import { Component } from "react";
+
+class ChildComp extends Component{
+    render(){
+        return <div style={ { fontFamily : "arial", fontSize : "30px", border : "2px solid red", padding :'20px' } }>
+                    <h2>Child Component</h2>
+                    <h4>{ this.props.title }</h4>
+                    <ul>
+                        <li>Sales { this.props.sales }</li>
+                        <li>Version { this.props.version }</li>
+                        <li>City { this.props.city }</li>
+                    </ul>
+               </div>
+    }
+}
+
+export default ChildComp;
+
+
+/* let ChildComp = ({sales,version,city,title}) => {
+    return <div style={ { fontFamily : "arial", fontSize : "30px", border : "2px solid red", padding :'20px' } }>
+                <h2>Child Fun Component</h2>
+                <h3>{ title }</h3>
+                <ul>
+                    <li>Sales { sales }</li>
+                    <li>Version { version }</li>
+                    <li>City { city }</li>
+                </ul>
+            </div>
+
+}
+
+export default ChildComp; */
