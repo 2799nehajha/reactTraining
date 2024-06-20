@@ -1,11 +1,14 @@
 app.jsx
 -----------
-import { Component } from "react";
+import React, { Component } from "react";
 
 class App extends Component{
     state = {
         strength : 0
     }
+
+    ipref = React.createRef();
+
     constructor(){
         super();
         // this.increaseStrength = this.increaseStrength.bind(this);
@@ -16,14 +19,12 @@ class App extends Component{
                     <h2>Sterngth : { this.state.strength }</h2>
                     {/* <button onClick={ () => this.increaseStrength() }>Increase Strength</button> */}
                     <button onClick={ this.increaseStrength }>Increase Strength</button>
-                    <button onClick={ this.increaseStrength }>Increase Strength</button>
-                    <button onClick={ this.increaseStrength }>Increase Strength</button>
-                    <button onClick={ this.increaseStrength }>Increase Strength</button>
-                    <button onClick={ this.increaseStrength }>Increase Strength</button>
-                    <button>Decrease Strength</button>
+                    <button onClick={ this.decreaseStrength }>Decrease Strength</button>
                     <br />
-                    <input type="number" />
-                    <button>Set Strength</button>
+                    <br />
+                    <input ref={this.ipref} type="number" />
+                    <button onClick={ this.setStrength }>Set Strength</button>
+                    <br />
                     <br />
                     <input type="range" />
                 </div>
@@ -33,14 +34,15 @@ class App extends Component{
             strength : this.state.strength+1
         })
     }
-    decreaseStrength(){
+    decreaseStrength = () => {
         this.setState({
             strength : this.state.strength-1
         })
     }
-    setStrength(nstrength){
+    setStrength = () => {
         this.setState({
-            strength : nstrength
+            strength : Number(this.ipref.current.value)
+            // strength : parseInt(this.ipref.current.value)
         })
     }
 }
