@@ -1,196 +1,44 @@
-index.js : node project
----------------------------
-
-/* 
-server that connects to mongoDB 
-create read update and delete
-express : web server
-mongoose : ORM 
-CORS : node 6060 / react 5050
-*/
-
-let express = require("express");
-let mongoose = require("mongoose");
-let cors = require("cors");
-
-let config = require("./config.json");
-let app = express();
-app.use(express.json());
-app.use(cors());
-
-let data = {"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael","last_name":"Jackson","avatar":"https://reqres.in/img/faces/7-image.jpg"},{"id":8,"email":"lindsay.ferguson@reqres.in","first_name":"Lindsay","last_name":"Ferguson","avatar":"https://reqres.in/img/faces/8-image.jpg"},{"id":9,"email":"tobias.funke@reqres.in","first_name":"Tobias","last_name":"Funke","avatar":"https://reqres.in/img/faces/9-image.jpg"},{"id":10,"email":"byron.fields@reqres.in","first_name":"Byron","last_name":"Fields","avatar":"https://reqres.in/img/faces/10-image.jpg"},{"id":11,"email":"george.edwards@reqres.in","first_name":"George","last_name":"Edwards","avatar":"https://reqres.in/img/faces/11-image.jpg"},{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}}
-
-app.get("/data", function(req, res){
-    res.send(data);
-});
-app.post("/data", function(req, res){
-    console.log(req.body);
-    res.send("hello soc-gen file")
-});
-
-app.listen(config.port, config.host, (error) => {
-    if(error) { console.log("Error ", error)}
-    else { console.log("web server is now live on ",config.host,":",config.port)}
-})
-
-
-
-
-
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-
-package.json
---------------
-
-{
-  "name": "crud-server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.4.3"
-  }
+batman.jsx
+------------
+let BatmanComp = () => {
+    return <div>
+                <h2>Batman Component</h2>
+            </div>
 }
 
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-childcomp.jsx
----------------
-
-import { useEffect, useState } from "react";
-import axios from "axios";
-
-let ChildComp = (prop) => {
-    let [users, setUsers] = useState({ data : [{id : 0, email : "vijay.shivu@gmail.com", first_name :"Vijay", last_name:"Shivakumar", avatar:"https://avatars.githubusercontent.com/u/95652257?s=400&u=14e5b8bc1877bffbee2169ec2358ddeaac14850d&v=4"}] })
-    // component mount
-    useEffect(()=> {
-        console.log("ChildComp Component Mounted");
-        axios.get("http://localhost:6060/data").then(res => {
-            // setUsers(Object.assign(users, res.data));
-            setUsers({data: [...users.data, ...res.data.data]});
-            console.log(users);
-        })
-    },[]);
+export default BatmanComp
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+let FlashComp = () => {
     return <div>
-                <h2>Child Component</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Sl #</th>
-                            <th>eMail</th>
-                            <th>Full Name</th>
-                            <th>Avatar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        { users.data.map((val) => <tr key={val.id}>
-                            <td>{val.id}</td>
-                            <td>{val.email}</td>
-                            <td>{val.first_name+" "+val.last_name}</td>
-                            <td>
-                                <img width="80" src={val.avatar} alt={val.first_name+" "+val.last_name} />
-                            </td>
-                        </tr> )}
-                    </tbody>
-                </table>
+                <h2>Flash Component</h2>
             </div>
-};
+}
 
-export default ChildComp;
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-form.component.jsx
-----------------------
-
-
-import { useState } from "react";
-import axios from "axios";
-
-let FormComponent = () => {
-    let [uname, setName] = useState("");
-    let [uage, setAge] = useState("");
-    let [umail, setMail] = useState("");
-    let [ucity, setCity] = useState("");
-
-    let submitHandler = () => {
-        if(uage < 18){
-            alert("you are too young to join us")
-        }else if(uage > 90){
-            alert("you are too old to join us")
-        }else{
-            let formdata = {
-                username : uname,
-                userage : uage,
-                usermail : umail,
-                usercity : ucity,
-            }
-            axios
-            .post("http://localhost:6060/data",JSON.stringify(formdata))
-            .then(res => console.log(res))
-        }
-    }
+export default FlashComp
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+let HomeComp = () => {
     return <div>
-                <h2>Registeration Form</h2>
-                <div className="mb-3">
-                    <label htmlFor="uname" className="form-label">User Name</label>
-                    <input value={uname} onChange={(evt) => setName(evt.target.value)} className="form-control" id="uname"/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="uage" className="form-label">User Age</label>
-                    <input value={uage} onChange={(evt) => setAge(evt.target.value)} type="number" className="form-control" id="uage"/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="umail" className="form-label">User eMail</label>
-                    <input value={umail} onChange={(evt) => setMail(evt.target.value)} className="form-control" id="umail"/>
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="ucity" className="form-label">User City</label>
-                    <input value={ucity} onChange={(evt) => setCity(evt.target.value)} className="form-control" id="ucity"/>
-                </div>
-                <button onClick={()=> submitHandler() } className="btn btn-primary mb-3">Register</button>
-                <hr />
-                <ul>
-                    <li>User Name {uname}</li>
-                    <li>User Age {uage}</li>
-                    <li>User Mail {umail}</li>
-                    <li>User City {ucity}</li>
-                </ul>
+                <h2>Home Component</h2>
             </div>
-};
+}
 
-export default FormComponent;
+export default HomeComp
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+let SupermanComp = () => {
+    return <div>
+                <h2>Superman Component</h2>
+            </div>
+}
 
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-app.jsx
-----------------------
-
-
-import ChildComp from "./components/childcomp";
-import FormComponent from "./components/form.component";
-
+export default SupermanComp
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 let App = () => {
   return (
     <div className="container">
-      <h1>Form Component</h1>
-      <FormComponent/>
-      <ChildComp/>
+      <h1>Routes in React</h1>
     </div>
   );
 }
 
 export default App;
-
-
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
