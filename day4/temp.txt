@@ -14,13 +14,15 @@ let ChildComp = (prop) => {
         switch(action.type){
             case "CHANGE_TITLE" : return {...state, title : action.payload }
             case "CHANGE_POWER" : return {...state, power : action.payload }
+            case "CHANGE_CITY" : return {...state, city : action.payload }
             default : return state
         }
     }
    
-    let [store, dispatch] = useReducer(reducerFun, {title : "default title", power : 0});
+    let [store, dispatch] = useReducer(reducerFun, {title : "default title", power : 0, city : "Bengaluru"});
     let titleRef = useRef();
     let powerRef = useRef();
+    let cityRef = useRef();
     return <div>
                 <h2>Child Component</h2>
                 <input ref={titleRef} type="text" />
@@ -29,9 +31,13 @@ let ChildComp = (prop) => {
                 <input ref={powerRef} type="number" />
                 <button onClick={() => dispatch({type : "CHANGE_POWER", payload : Number(powerRef.current.value) })}>Change Power</button>
                 <br />
+                <input ref={cityRef} type="text" />
+                <button onClick={() => dispatch({type : "CHANGE_CITY", payload : cityRef.current.value })}>Change City</button>
+                <br />
                 <ul>
                     <li>Title : {store.title}</li>
                     <li>Power : {store.power}</li>
+                    <li>City : {store.city}</li>
                 </ul>
             </div>
 };
