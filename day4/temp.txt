@@ -1,9 +1,25 @@
 import { useState } from "react";
+
+function useToggle(initVal){
+    let [state, setState] = useState(initVal);
+    let toggle = () => {
+        setState(!state)
+    }
+    return [state, toggle]
+}
+
+export default useToggle;
+
+
+
+###############################################################################################
+
 import ChildComp from "./components/child.component";
+import useToggle from "./hooks/usetoggle";
 
 let App = () => {
-  let [show, setShow] = useState(true);
-
+  // console.log(useToggle());// 
+  let [show, setShow] = useToggle(true)
   return (
     <div>
       <h1>Hooks Custom</h1>
