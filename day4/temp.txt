@@ -1,32 +1,24 @@
-import { useState } from "react";
+let FormComponent = () => {
+    return <div>
+                <h2>Registeration Form</h2>
+                <div className="mb-3">
+                    <label htmlFor="uname" className="form-label">User Name</label>
+                    <input className="form-control" id="uname"/>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="uage" className="form-label">User Age</label>
+                    <input type="number" className="form-control" id="uage"/>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="umail" className="form-label">User eMail</label>
+                    <input className="form-control" id="umail"/>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="ucity" className="form-label">User City</label>
+                    <input className="form-control" id="ucity"/>
+                </div>
+                <button className="btn btn-primary mb-3">Register</button>
+            </div>
+};
 
-function useToggle(initVal){
-    let [state, setState] = useState(initVal);
-    let toggle = () => {
-        setState(!state)
-    }
-    return [state, toggle]
-}
-
-export default useToggle;
-
-
-
-###############################################################################################
-
-import ChildComp from "./components/child.component";
-import useToggle from "./hooks/usetoggle";
-
-let App = () => {
-  // console.log(useToggle());// 
-  let [show, setShow] = useToggle(true)
-  return (
-    <div>
-      <h1>Hooks Custom</h1>
-      <button onClick={()=> setShow(!show)}>Show / Hide</button>
-      { show ? <ChildComp/> : "Component is hidden"}
-    </div>
-  );
-}
-
-export default App;
+export default FormComponent;
