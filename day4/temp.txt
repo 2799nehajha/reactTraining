@@ -10,3 +10,29 @@ let Heroes = () => {
               </div>
 }
 export default Heroes;
+
+
+
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+import { useState } from "react";
+
+let ChildComp = ({title,sales,city,version}) => {
+   /* Hooks */
+   // console.log(useState());
+   let [state, setState] = useState({username : "vijay"});
+   
+    return <div>
+                <h2>Child Component</h2>
+                <h3>Title {title}</h3>
+                <h3>Sales {sales}</h3>
+                <h3>City {city}</h3>
+                <h3>Version {version}</h3>
+                <h3>User {state.username}</h3>
+                <button onClick={()=> setState({username : "vijay 2.0"})}>Change User</button>
+            </div>
+}
+
+export default ChildComp;
