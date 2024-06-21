@@ -11,11 +11,7 @@ let Heroes = () => {
 }
 export default Heroes;
 
-
-
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 import { useState } from "react";
 
@@ -36,3 +32,16 @@ let ChildComp = ({title,sales,city,version}) => {
 }
 
 export default ChildComp;
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+import ChildComp from "./components/childcomp";
+import Heroes from "./components/heroes";
+
+let App = () => <div>
+                  <h1>Function Component</h1>
+                  <ChildComp version={101} sales={56} city="Bengaluru" title="First Child Component"/>
+                  <Heroes/>
+                </div>
+
+export default App;
