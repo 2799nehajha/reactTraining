@@ -1,47 +1,28 @@
+import React, { useRef } from "react";
 import { useState } from "react"
 
 let Heroes = () => {
-    let [avengers, setAvengers] = useState([])
+    let [heroes, setHeroes] = useState({avengers : [], justiceleague: []});
+    let ipTitle = React.createRef();
+    let ipCity = React.createRef();
+    let ipJLTitle = React.createRef();
+    let ipJLCity = React.createRef();
+/*     let ipRef2 = useRef(); */
      return   <div>
-                <h1>Avengers</h1>
-                <input type="text" />
-                <button>Add Avenger</button>
-                <ol>{ avengers.map((val, idx) => <li key={idx}>{val}</li> )}</ol>
+                <h1>Heroes</h1>
+                <input ref={ipTitle} type="text" />
+                <input ref={ipCity} type="text" />
+                <button onClick={() => setHeroes({...heroes, avengers : [...heroes.avengers, {city : ipCity.current.value, title: ipTitle.current.value }]})} >Add Avenger</button>
+                <br />
+                <br />
+                <input ref={ipJLTitle} type="text" />
+                <input ref={ipJLCity} type="text" />
+                <button onClick={() => setHeroes({...heroes, justiceleague : [...heroes.justiceleague, {city : ipJLCity.current.value, title: ipJLTitle.current.value }]})} >Add Justice League</button>
+               {/*  <br />
+                <input ref={ipRef2} type="text" />
+                <button onClick={() => setAvengers([...avengers, ipRef2.current.value]) }>Add Avenger</button> */}
+                <ol>{ heroes.avengers.map((val, idx) => <li key={idx}>{ val.title } | City { val.city }</li> )}</ol>
+                <ol>{ heroes.justiceleague.map((val, idx) => <li key={idx}>{ val.title } | City { val.city }</li> )}</ol>
               </div>
 }
 export default Heroes;
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-import { useState } from "react";
-
-let ChildComp = ({title,sales,city,version}) => {
-   /* Hooks */
-   // console.log(useState());
-   let [state, setState] = useState({username : "vijay"});
-   
-    return <div>
-                <h2>Child Component</h2>
-                <h3>Title {title}</h3>
-                <h3>Sales {sales}</h3>
-                <h3>City {city}</h3>
-                <h3>Version {version}</h3>
-                <h3>User {state.username}</h3>
-                <button onClick={()=> setState({username : "vijay 2.0"})}>Change User</button>
-            </div>
-}
-
-export default ChildComp;
-
-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-
-import ChildComp from "./components/childcomp";
-import Heroes from "./components/heroes";
-
-let App = () => <div>
-                  <h1>Function Component</h1>
-                  <ChildComp version={101} sales={56} city="Bengaluru" title="First Child Component"/>
-                  <Heroes/>
-                </div>
-
-export default App;
