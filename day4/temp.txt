@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 
 let ChildComp = (prop) => {
 
@@ -13,16 +13,25 @@ let ChildComp = (prop) => {
     let reducerFun = (state,action) => {
         switch(action.type){
             case "CHANGE_TITLE" : return {...state, title : action.payload }
+            case "CHANGE_POWER" : return {...state, power : action.payload }
             default : return state
         }
     }
    
-    let [store, dispatch] = useReducer(reducerFun, {title : "default title"});
-
+    let [store, dispatch] = useReducer(reducerFun, {title : "default title", power : 0});
+    let titleRef = useRef();
+    let powerRef = useRef();
     return <div>
                 <h2>Child Component</h2>
+                <input ref={titleRef} type="text" />
+                <button onClick={() => dispatch({type : "CHANGE_TITLE", payload : titleRef.current.value })}>Change Title</button>
+                <br />
+                <input ref={powerRef} type="number" />
+                <button onClick={() => dispatch({type : "CHANGE_POWER", payload : Number(powerRef.current.value) })}>Change Power</button>
+                <br />
                 <ul>
                     <li>Title : {store.title}</li>
+                    <li>Power : {store.power}</li>
                 </ul>
             </div>
 };
