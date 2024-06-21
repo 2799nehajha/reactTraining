@@ -1,19 +1,53 @@
 import { useState } from "react";
+import ChildComp from "./components/child.component";
 
-let Avengers = () => {
-    let [avenger, setAvenger ] = useState({ firstname : "", lastname : "" })
+let App = () => {
+  let [appPower, setPower] = useState(0);
+  let [appTitle, setTitle] = useState("");
+  let [show, toggleComp] = useState(true);
+
+  return (
+    <div>
+      <h1>Hooks Lifecycle</h1>
+      <input value={appPower} type="range" onChange={(event) => setPower(Number(event.target.value))} />
+      <button onClick={()=> toggleComp(!show)}>Show / Hide</button>
+      <button onClick={()=> {
+        let titles = ["title 1", 'title 2', 'title 3', 'title 4'];
+        setTitle(titles[Math.floor(Math.random() * titles.length )]);
+      }}>Set Random Title</button>
+      { show ? <ChildComp setPower={setPower} title={appTitle} power={appPower}/> : "Child Component is hidden" }
+    </div>
+  );
+}
+
+export default App;
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+import { useEffect } from "react";
+
+let ChildComp = (prop) => {
+  // component mount
+  useEffect(()=> {
+    console.log("ChildComp Component Mounted");
+  },[]);
+  // component update
+  useEffect(()=> {
+    console.log("ChildComp Component was Updated",prop.power);
+  },[prop.power]);
+  // component unmount
+  useEffect(()=> {
+    return () =>  console.log("ChildComp Component was Un-Mounted");
+  },[]);
     return <div>
-                <h2>Avengers Component</h2>
-                <input type="text" />
-                <button>Add First Name</button>
-                <br />
-                <br />
-                <input type="text" />
-                <button>Add Last Name</button>
-                <hr />
-                <p>First Name : {avenger.firstname}</p>
-                <p>Last Name : {avenger.lastname}</p>
-           </div>
+                <h2>Child Component</h2>
+                <h3>Title : {prop.title}</h3>
+                <h3>Power : {prop.power}</h3>
+                <button onClick={() => prop.setPower(10)}>I want to set my own power</button>
+            </div>
 };
 
-export default Avengers;
+export default ChildComp;
