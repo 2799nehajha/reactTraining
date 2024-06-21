@@ -1,28 +1,19 @@
-import React, { useRef } from "react";
-import { useState } from "react"
+import { useState } from "react";
 
-let Heroes = () => {
-    let [heroes, setHeroes] = useState({avengers : [], justiceleague: []});
-    let ipTitle = React.createRef();
-    let ipCity = React.createRef();
-    let ipJLTitle = React.createRef();
-    let ipJLCity = React.createRef();
-/*     let ipRef2 = useRef(); */
-     return   <div>
-                <h1>Heroes</h1>
-                <input ref={ipTitle} type="text" />
-                <input ref={ipCity} type="text" />
-                <button onClick={() => setHeroes({...heroes, avengers : [...heroes.avengers, {city : ipCity.current.value, title: ipTitle.current.value }]})} >Add Avenger</button>
+let Avengers = () => {
+    let [avenger, setAvenger ] = useState({ firstname : "", lastname : "" })
+    return <div>
+                <h2>Avengers Component</h2>
+                <input type="text" />
+                <button>Add First Name</button>
                 <br />
                 <br />
-                <input ref={ipJLTitle} type="text" />
-                <input ref={ipJLCity} type="text" />
-                <button onClick={() => setHeroes({...heroes, justiceleague : [...heroes.justiceleague, {city : ipJLCity.current.value, title: ipJLTitle.current.value }]})} >Add Justice League</button>
-               {/*  <br />
-                <input ref={ipRef2} type="text" />
-                <button onClick={() => setAvengers([...avengers, ipRef2.current.value]) }>Add Avenger</button> */}
-                <ol>{ heroes.avengers.map((val, idx) => <li key={idx}>{ val.title } | City { val.city }</li> )}</ol>
-                <ol>{ heroes.justiceleague.map((val, idx) => <li key={idx}>{ val.title } | City { val.city }</li> )}</ol>
-              </div>
-}
-export default Heroes;
+                <input type="text" />
+                <button>Add Last Name</button>
+                <hr />
+                <p>First Name : {avenger.firstname}</p>
+                <p>Last Name : {avenger.lastname}</p>
+           </div>
+};
+
+export default Avengers;
